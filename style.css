@@ -1,0 +1,69 @@
+:root {
+  --background: rgb(101, 115, 128);
+  --textcolor: rgb(34, 27, 27);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  user-select: none;
+  box-sizing: border-box;
+  font-family: "Teko", sans-serif;
+  font-size: 1.1em;
+  color: white;
+  background-color: rgb(19, 21, 23);
+  /* outline: 1px solid white; */
+}
+
+html,
+body {
+  height: 100vh;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2em;
+}
+
+button {
+  border-radius: 0.5em;
+  background-color: white;
+  color: black;
+  padding: 0.2em 0.5em;
+  border: none;
+  border-bottom: 0.2em solid gray;
+}
+
+button:hover {
+  background-color: lightgray;
+}
+
+button:active {
+  background-color: gray;
+  transform: translateY(0.1em);
+  border: none;
+}
+
+.container {
+  display: grid;
+  height: 40vh;
+  width: 40vh;
+}
+
+.container div {
+  background-color: white;
+}
+
+.options {
+  display: flex;
+  gap: 1em;
+}
+
+.col {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
