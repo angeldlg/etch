@@ -27,11 +27,13 @@ function color(e) {
   e.target.style.backgroundColor = "black";
 }
 function erase() {
-  const gridSquares = document.querySelectorAll(".square");
+    container.innerHTML = ''
+    makeGrid(gridSize)
+//   const gridSquares = document.querySelectorAll(".square");
 
-  gridSquares.forEach((square) => {
-    square.removeAttribute("style");
-  });
+//   gridSquares.forEach((square) => {
+//     square.removeAttribute("style");
+//   });
 }
 
 slider.addEventListener("input", (e) => {
@@ -40,8 +42,8 @@ slider.addEventListener("input", (e) => {
 
 slider.addEventListener("mouseup", () => {
   gridSize = slider.value;
-  erase();
   makeGrid(gridSize);
+  erase();
 });
 
 makeGrid(gridSize);
