@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>etch</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="palette.css">
     <script defer src="main.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,15 +14,51 @@
 </head>
 
 <body>
-    <div class="container"></div>
-
+    <div class="page">
+        <div class="container"></div>
+        <div class="palette">
+            <button id="paletteColor" class="palette-color-1"></button>
+            <button id="paletteColor" class="palette-color-2"></button>
+            <button id="paletteColor" class="palette-color-3"></button>
+            <button id="paletteColor" class="palette-color-4"></button>
+            <button id="paletteColor" class="palette-color-5"></button>
+            <button id="paletteColor" class="palette-color-6"></button>
+            <button id="paletteColor" class="palette-color-7"></button>
+            <button id="paletteColor" class="palette-color-8"></button>
+            <button id="paletteColor" class="palette-color-9"></button>
+            <button id="paletteColor" class="palette-color-10"></button>
+            <button id="paletteColor" class="palette-color-11"></button>
+            <button id="paletteColor" class="palette-color-12"></button>
+            <button id="paletteColor" class="palette-color-13"></button>
+            <button id="paletteColor" class="palette-color-14"></button>
+            <button id="paletteColor" class="palette-color-15"></button>
+            <button id="paletteColor" class="palette-color-16"></button>
+            <button id="paletteColor" class="palette-color-17"></button>
+            <button id="paletteColor" class="palette-color-18"></button>
+            <button id="paletteColor" class="palette-color-19"></button>
+            <button id="paletteColor" class="palette-color-20"></button>
+            <button id="paletteColor" class="palette-color-21"></button>
+            <button id="paletteColor" class="palette-color-22"></button>
+            <button id="paletteColor" class="palette-color-23 chosen-color"></button>
+            <button id="paletteColor" class="palette-color-24"></button>
+        </div>
+    </div>
     <div class="options">
-        <div class="col">
+
+        <div class="row">
+            <label for="color">pencil<input class="picker" type="color"></label>
+            <label for="background">board<input class="background" type="color"></label>
+            <label for="grid-lines">grid color<input class="grid-linesPicker" type="color"></label>
+        </div>
+        <div class="buttons row">
             <button class="clear">clear</button>
+            <button class="lines">grid</button>
+            <button class="rainbow">rainbow</button>
+            <button class="eraser">eraser</button>
         </div>
         <div class="col">
-            <p>size: <output id="gridValue"></output></p>
-            <input id="slider" type="range" min="2" max="64" step="1">
+            <p><output id="gridValue"></output></p>
+            <input id="slider" type="range" min="2" max="64" step="2">
         </div>
     </div>
 </body>
