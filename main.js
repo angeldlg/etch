@@ -1,26 +1,25 @@
+// import html2canvas from 'html2canvas';
+
 const container = document.querySelector(".container");
-const clear = document.querySelector(".clear");
-const gridLines = document.querySelector(".lines");
-const eraser = document.querySelector(".eraser");
 const rainbow = document.querySelector(".rainbow");
 const palette = document.querySelector(".palette");
-const paintPicker = document.querySelector(".picker");
-const backgroundPicker = document.querySelector(".background");
-const gridLinesPicker = document.querySelector(".grid-linesPicker");
-const gridValue = document.querySelector("#gridValue");
 const slider = document.querySelector("#slider");
-const paletteColors = document.querySelectorAll("#paletteColor");
-
+const eraser = document.querySelector(".eraser");
+const create = document.querySelector(".new");
+const grid = document.querySelector(".lines");
+const paintPicker = document.querySelector(".picker");
+const gridValue = document.querySelector("#gridValue");
+const gridPicker = document.querySelector(".grid-linesPicker");
+const backgroundPicker = document.querySelector(".background");
+const paletteColors = document.querySelectorAll("#palette-color");
 let lastPaint = paintPicker.value;
 let gridSize = 16;
-paintPicker.value = "#cbcdcf";
-backgroundPicker.value = "#7f8286";
-gridLinesPicker.value = "#000000";
-
-gridValue.textContent =
-  `${gridSize} x ${gridSize}` || `${slider.value} x ${slider.value}`;
 
 slider.value = gridSize;
+gridPicker.value = "#000000";
+paintPicker.value = "#4d81c3";
+backgroundPicker.value = "#2f4e99";
+gridValue.textContent = `${gridSize} x ${gridSize}`;
 
 function makeGrid(size) {
   container.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
@@ -31,24 +30,23 @@ function makeGrid(size) {
     container.appendChild(grid);
     grid.classList.add("square");
     grid.style.backgroundColor = backgroundPicker.value;
+    grid.style.outline = backgroundPicker.value;
   }
 }
 
-container.addEventListener("mousedown", color);
-container.addEventListener("mousedown", () => {
-  container.addEventListener("mouseover", color);
-});
-window.addEventListener("mouseup", () => {
-  container.removeEventListener("mouseover", color);
-});
-
 function color(e) {
   container.classList.add("modified");
-  if (rainbow.classList.contains("toggled")) {
+  if (
+    rainbow.classList.contains("toggled-rainbow") &&
+    eraser.classList.contains("toggled")
+  ) {
+    e.target.style.backgroundColor = backgroundPicker.value;
+  } else if (rainbow.classList.contains("toggled-rainbow")) {
     rainbowRgb = rainbowMode();
     rainbowHex = rgbToHexadecimal(rainbowRgb);
+    paintPicker.toggleAttribute("disabled");
+
     e.target.style.backgroundColor = rainbowHex;
-    paintPicker.value = rainbowHex;
   } else {
     e.target.style.backgroundColor = paintPicker.value;
   }
@@ -59,7 +57,6 @@ function recolor() {
   gridSquares.forEach((gridSquares) => {
     gridSquares.style.backgroundColor = backgroundPicker.value;
   });
-  // gridSquares.style.backgroundColor = backgroundPicker.value;
 }
 
 function remake() {
@@ -78,7 +75,6 @@ function unchooseColor() {
 function chooseColor(e) {
   unchooseColor();
   e.target.classList.add("chosen-color");
-
   const paletteColor = getComputedStyle(e.target).backgroundColor;
   const rgbValues = paletteColor.match(/\d+/g);
   const r = parseInt(rgbValues[0]);
@@ -100,7 +96,6 @@ function rainbowMode() {
   return `rgb(${randomR}, ${randomG}, ${randomB})`;
 }
 
-
 function rgbToHexadecimal(rainbowValue) {
   const rgbValues = rainbowValue.match(/\d+/g);
 
@@ -114,6 +109,14 @@ function rgbToHexadecimal(rainbowValue) {
 
   return converter(r, g, b);
 }
+
+container.addEventListener("mousedown", color);
+container.addEventListener("mousedown", () => {
+  container.addEventListener("mouseover", color);
+});
+window.addEventListener("mouseup", () => {
+  container.removeEventListener("mouseover", color);
+});
 
 palette.addEventListener("mousedown", chooseColor);
 palette.addEventListener("mousedown", () => {
@@ -141,18 +144,18 @@ backgroundPicker.addEventListener("input", () => {
     });
   }
 });
-gridLinesPicker.addEventListener("input", () => {
+gridPicker.addEventListener("input", () => {
   const gridSquares = document.querySelectorAll(".square");
   gridSquares.forEach((gridSquares) => {
-    gridSquares.style.outline = `1px solid ${gridLinesPicker.value}`;
+    gridSquares.style.outline = `1px solid ${gridPicker.value}`;
   });
 });
-gridLines.addEventListener("mousedown", () => {
+grid.addEventListener("mousedown", () => {
   const gridSquares = document.querySelectorAll(".square");
-  gridLines.classList.toggle("toggled");
-  if (gridLines.classList.contains("toggled")) {
+  grid.classList.toggle("toggled");
+  if (grid.classList.contains("toggled")) {
     gridSquares.forEach((gridSquares) => {
-      gridSquares.style.outline = `1px solid ${gridLinesPicker.value}`;
+      gridSquares.style.outline = `1px solid ${gridPicker.value}`;
     });
   } else {
     gridSquares.forEach((gridSquares) => {
@@ -164,7 +167,7 @@ eraser.addEventListener("mousedown", () => {
   eraser.classList.toggle("toggled");
   paintPicker.toggleAttribute("disabled");
   backgroundPicker.toggleAttribute("disabled");
-  gridLinesPicker.toggleAttribute("disabled");
+  gridPicker.toggleAttribute("disabled");
   if (eraser.classList.contains("toggled")) {
     lastPaint = paintPicker.value;
     paintPicker.value = backgroundPicker.value;
@@ -172,8 +175,9 @@ eraser.addEventListener("mousedown", () => {
     paintPicker.value = lastPaint;
   }
 });
-clear.addEventListener("mousedown", recolor);
+create.addEventListener("mousedown", recolor);
 rainbow.addEventListener("click", () => {
-  rainbow.classList.toggle("toggled");
+  rainbow.classList.toggle("toggled-rainbow");
 });
+
 makeGrid(gridSize);

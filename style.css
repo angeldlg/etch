@@ -3,9 +3,9 @@
   --textcolor: rgb(255, 255, 255);
   --border: rgb(19, 21, 23);
   --board: rgb(255, 255, 255);
-  --buttoncolor1: rgb(155, 193, 224);
-  --buttoncolor2: rgb(42, 90, 130);
-  --buttoncolor3: rgb(103, 144, 176);
+  --buttoncolor1: rgb(164, 232, 255);
+  --buttoncolor2: rgb(0, 96, 128);
+  --buttoncolor3: rgb(164, 232, 255);
 }
 
 * {
@@ -30,14 +30,67 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  gap: 0.5em;
+}
+
+.page {
+  margin: 0.25em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+}
+
+.container {
+  cursor: cell;
+  display: grid;
+  width: 75vmin;
+  aspect-ratio: 1 / 1;
+  outline: 2px solid var(--border);
+  box-shadow: 0 0 0.66em 0.05em rgb(6, 7, 8);
+}
+
+.all-options {
+  width: 75vmin;
+  display: flex;
+  flex-direction: column;
   gap: 1em;
+}
+
+.color-pickers {
+  display: flex;
+  text-align: center;
+  gap: 0.5em;
+}
+
+.slider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+.buttons span {
+  width: 1px;
+  background: linear-gradient(transparent, rgb(73, 73, 73), transparent);
+}
+
+.board-options {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: space-around;
 }
 
 .buttons button {
   cursor: pointer;
   height: 1.5em;
   width: 4em;
-  padding: 0em 0.5em;
 
   border-radius: 0.5em;
   color: black;
@@ -45,6 +98,7 @@ body {
 
   border: none;
   border-bottom: 4px solid gray;
+  transition: background-color 0.1s, border-bottom 0.1s, transform 0.1s;
 }
 
 .buttons button:hover {
@@ -54,65 +108,66 @@ body {
 
 .buttons button:active {
   background-color: var(--buttoncolor3);
-  transform: translateY(0.1em);
+  transform: translateY(10%);
   border: none;
 }
 
 .buttons .toggled {
   background-color: var(--buttoncolor1);
-  border-bottom: 0.2em solid var(--buttoncolor2);
+  border-bottom: 4px solid var(--buttoncolor2);
 }
 
-.page {
+.buttons .toggled-rainbow {
+  background-color: var(--buttoncolor1);
+  border-bottom: 4px solid var(--buttoncolor2);
+  animation: rainbow 0.75s linear infinite;
+}
+
+@keyframes rainbow {
+  from {
+    filter: hue-rotate(10deg);
+  }
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+label {
+  font-size: 0.8em;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1em;
-}
-
-.container {
-  display: grid;
-  width: 75vmin;
-  aspect-ratio: 1 / 1;
-  outline: 2px solid var(--border);
-}
-
-.options {
-  display: flex;
-  /* justify-content: center; */
-  align-items: center;
-  flex-direction: column;
-  gap: 0.5em;
-}
-
-.row {
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-}
-
-.col {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
 }
 
 input[type="color"] {
+  height: 1.25em;
+  width: 2.5em;
   cursor: pointer;
   border: none;
-  height: 1em;
-  width: 4em;
+  transition: transform 0.1s;
+}
+
+input[type="color"]:hover {
+  transform: scale(102.5%);
+}
+
+input[type="color"]:active {
+  transform: translateY(5%);
 }
 
 input[type="range"] {
-  width: 7.5em;
+  width: 25vmin;
 }
 
-label {
-  font-size: 0.9em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+@media (max-width: 750px) {
+  input[type="range"] {
+    width: 40vmin;
+  }
+
+  .buttons span {
+    display: none;
+  }
+}
+
+canvas {
+  width: 50vw;
 }

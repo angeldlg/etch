@@ -2,27 +2,33 @@
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   /* grid-template-rows: repeat(1, 1fr); */
-  height: 100%;
+  height: 75vmin;
 }
 
 .palette button {
+  cursor: pointer;
   height: 100%;
   aspect-ratio: 2 / 1;
   border: none;
+  transition: transform .5s ease-in-out;
+}
+
+.palette button:hover {
+  z-index: 1;
+  outline: 2px solid white;
+  transform: translate(-7.5%);
+  transition: transform 0.05s ease-in-out;
 }
 
 .chosen-color {
-  animation: show 0.1s 0.1s cubic-bezier(0.38, 0.97, 0.56, 0.76) forwards;
-  /* transform: translateX(-25%); */
-  outline: 1px solid white;
+  z-index: 2;
+  transform: translate(-5%);
+  outline: 2px solid white;
 }
 
-@keyframes show {
-  100% {
-    opacity: 1;
-    transform: translateX(-10%);
-  }
-}
+/* -------------- */
+/* palette colors */
+/* -------------- */
 
 .palette-color-1 {
   background: #aa263e;
