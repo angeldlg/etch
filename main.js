@@ -1,5 +1,3 @@
-// import html2canvas from 'html2canvas';
-
 const container = document.querySelector(".container");
 const rainbow = document.querySelector(".rainbow");
 const palette = document.querySelector(".palette");
