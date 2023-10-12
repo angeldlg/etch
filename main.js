@@ -11,7 +11,7 @@ const gridPicker = document.querySelector(".grid-linesPicker");
 const backgroundPicker = document.querySelector(".background");
 const paletteColors = document.querySelectorAll("#palette-color");
 let lastPaint = paintPicker.value;
-let gridSize = 16;
+let gridSize = 64;
 
 slider.value = gridSize;
 gridPicker.value = "#000000";
@@ -71,6 +71,7 @@ function unchooseColor() {
 }
 
 function chooseColor(e) {
+  if (eraser.classList.contains("toggled")) return
   unchooseColor();
   e.target.classList.add("chosen-color");
   const paletteColor = getComputedStyle(e.target).backgroundColor;
@@ -191,5 +192,3 @@ create.addEventListener("mousedown", recolor);
 rainbow.addEventListener("click", () => {
   rainbow.classList.toggle("toggled-rainbow");
 });
-
-makeGrid(gridSize);
