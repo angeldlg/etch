@@ -133,6 +133,18 @@ slider.addEventListener("mouseup", () => {
   if (slider.value === gridSize) return;
   gridSize = slider.value;
   remake();
+
+  const gridSquares = document.querySelectorAll(".square");
+  if (grid.classList.contains("toggled")) {
+    gridSquares.forEach((gridSquares) => {
+      gridSquares.style.outline = `1px solid ${gridPicker.value}`;
+    });
+  } else {
+    gridSquares.forEach((gridSquares) => {
+      gridSquares.style.removeProperty("outline");
+    });
+  }
+
   // makeGrid(gridSize)
 });
 backgroundPicker.addEventListener("input", () => {
@@ -150,6 +162,7 @@ gridPicker.addEventListener("input", () => {
     gridSquares.style.outline = `1px solid ${gridPicker.value}`;
   });
 });
+
 grid.addEventListener("mousedown", () => {
   const gridSquares = document.querySelectorAll(".square");
   grid.classList.toggle("toggled");
