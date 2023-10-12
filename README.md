@@ -4,4 +4,4 @@ Basic drawing application allowing users to draw on a grid, select colors, erase
 
 [Try it here!](https://angeldlg.github.io/etch/)
 
-![Uploading etch-cuphead.png…]()
+![etch-cuphead](https://github.com/angeldlg/etch/assets/44849133/810322ab-bdd5-4693-9509-a656fb195609)
