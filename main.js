@@ -156,6 +156,7 @@ backgroundPicker.addEventListener("input", () => {
 });
 gridPicker.addEventListener("input", () => {
   const gridSquares = document.querySelectorAll(".square");
+  grid.classList.add("toggled");
   gridSquares.forEach((gridSquares) => {
     gridSquares.style.outline = `1px solid ${gridPicker.value}`;
   });
